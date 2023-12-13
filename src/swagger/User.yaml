@@ -1,0 +1,236 @@
+paths:
+  /register:
+    post:
+      summary: 사용자 등록
+      description: 사용자 등록
+      tags:
+        - User
+      requestBody:
+        description: 사용자 정보
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - password
+                - name
+              properties:
+                id:
+                  type: string
+                  example: test
+                  description: 테스트 아이디
+                password:
+                  type: string
+                  example: '1234'
+                  description: 테스트 암호
+                name:
+                  type: string
+                  example: test
+                  description: 테스트 이름
+      responses:
+        200:
+          description: 사용자 등록 성공
+          content:
+            application/json:
+              examples:
+                'application/json':
+                  value:
+                    msg: 회원가입이 완료되었습니다.
+                    id: test
+                    name: test
+        400:
+          description: 사용자 등록 실패
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: 사용자 등록 실패 (Id 없음)
+                  value:
+                    errorCode: -301
+                    errorMessage: Id required
+                    details: ''
+                example2:
+                  summary: 사용자 등록 실패 (Password 없음)
+                  value:
+                    errorCode: -302
+                    errorMessage: Password required
+                    details: ''
+                example3:
+                  summary: 사용자 등록 실패 (Name 없음)
+                  value:
+                    errorCode: -304
+                    errorMessage: Name required
+                    details: ''
+                example4:
+                  summary: 사용자 등록 실패 (Id duplicated)
+                  value:
+                    errorCode: -409
+                    errorMessage: Id duplicated
+                    details: ''
+        500:
+          description: 사용자 등록 오류
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /user:
+    get:
+      summary: 사용자 정보 조회
+      description: 사용자 정보 조회
+      tags:
+        - User
+      parameters:
+        - name: Authorization
+          in: header
+          description: Auth Token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 사용자 정보
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  example: test
+                  description: 사용자 아이디
+      responses:
+        200:
+          description: 사용자 정보 조회 성공
+          content:
+            application/json:
+              examples:
+                'application/json':
+                  value:
+                    id: test
+                    name: test
+        404:
+          description: 사용자가 없는 경우
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidUser'
+        500:
+          description: 사용자 등록 오류
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+    patch:
+      summary: 사용자 정보 변경
+      description: 사용자 정보 변경
+      tags:
+        - User
+      parameters:
+        - name: Authorization
+          in: header
+          description: Auth Token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 사용자 정보
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - name
+              properties:
+                id:
+                  type: string
+                  example: test
+                  description: 사용자 아이디
+                name:
+                  type: string
+                  example: test
+                  description: 사용자 네임
+      responses:
+        200:
+          description: 사용자 정보 변경 성공
+          content:
+            application/json:
+              examples:
+                'application/json':
+                  value:
+                    msg: 'name changed'
+                    name: test2
+        400:
+          description: 사용자 정보 누락 (id&name)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdAndNameError'
+        404:
+          description: 사용자가 없는 경우
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidUser'
+        500:
+          description: 사용자 등록 오류
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+    delete:
+      summary: 사용자 정보 삭제
+      description: 사용자 정보 삭제
+      tags:
+        - User
+      parameters:
+        - name: Authorization
+          in: header
+          description: Auth Token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 사용자 정보
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - password
+              properties:
+                id:
+                  type: string
+                  example: test
+                  description: 사용자 아이디
+                password:
+                  type: string
+                  example: 1234
+                  description: 사용자 암호
+      responses:
+        200:
+          description: 사용자 정보 삭제 성공
+          content:
+            application/json:
+              examples:
+                'application/json':
+                  value:
+                    msg: user deleted
+        404:
+          description: 사용자가 없는 경우
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidUser'
+        500:
+          description: 사용자 등록 오류
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'

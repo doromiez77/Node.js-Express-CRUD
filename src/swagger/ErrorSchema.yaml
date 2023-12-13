@@ -1,0 +1,99 @@
+components:
+  schemas:
+    NameError:
+      type: object
+      properties:
+        errorCode:
+          type: number
+          format: int32
+          example: 402
+          description: '오류 코드'
+        msg:
+          type: string
+          example: 'Name required'
+          description: '오류 메시지'
+
+    IdError:
+      type: object
+      properties:
+        errorCode:
+          type: number
+          format: int32
+          example: 400
+          description: '오류 코드'
+        msg:
+          type: string
+          example: 'Id required'
+          description: '오류 메시지'
+
+    PasswordError:
+      type: object
+      properties:
+        errorCode:
+          type: number
+          format: int32
+          example: 401
+          description: '오류 코드'
+        msg:
+          type: string
+          example: 'Password required'
+          description: '오류 메시지'
+
+    IdAndNameError:
+      type: object
+      properties:
+        errorCode:
+          type: number
+          format: int32
+          example: -341
+          description: '오류 코드'
+        errorMessage:
+          type: string
+          example: 'Id and Name required'
+          description: '오류 메시지'
+
+    InvalidUser:
+      type: object
+      properties:
+        errorCode:
+          type: number
+          format: int32
+          example: 404
+          description: '오류 코드'
+        msg:
+          type: string
+          example: 'User not found'
+          description: '오류 메시지'
+        details:
+          type: string
+          example: ''
+          description: '오류메시지 Datails'
+    DuplicatedError:
+      type: object
+      properties:
+        errorCode:
+          type: number
+          format: int32
+          example: 409
+          description: '오류 코드'
+        errorMessage:
+          type: string
+          example: 'Id duplicated'
+          description: '오류 메시지'
+
+    ServerError:
+      type: object
+      properties:
+        errorCode:
+          type: number
+          format: int32
+          example: 500
+          description: '오류 코드'
+        errorMessage:
+          type: string
+          example: 'Internal Server Error'
+          description: '오류 메시지'
+        details:
+          type: string
+          example: ''
+          description: '오류 메시지 상세'

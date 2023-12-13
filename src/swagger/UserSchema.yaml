@@ -1,0 +1,17 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: test
+          description: 테스트 아이디
+        name:
+          type: string
+          example: test
+          description: 테스트 네임
+        regDate:
+          type: date-time
+          example: '2023-10-24T05:24:05.342+00:00'
+          description: 가입 일자

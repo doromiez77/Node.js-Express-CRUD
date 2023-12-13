@@ -1,0 +1,35 @@
+components:
+  schemas:
+    Token:
+      type: object
+      properties:
+        id:
+          type: string
+          example: test
+          description: 테스트 아이디
+        authToken:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZWVwc2NlbnQiLCJzdWIiOiJiMmIiLCJleHAiOjE2OTgxMjM5MDA4MTAsImlhdCI6MTY5ODAzNzUwMDgxMCwiaWQiOiJ0ZXN0NCIsImlzQXV0aFRva2VuIjp0cnVlfQ.53GmunnGza-yhOy6gBoPPCcB0Q5zZi9HEOtlvn42hqI
+          description: authToken
+        expireDate:
+          type: date-time
+          example: '2023-11-15T05:24:05.342+00:00'
+          description: 만료 날짜
+    AladyToken:
+      type: object
+      properties:
+        id:
+          type: string
+          example: test
+          description: '테스트 아이디'
+        authToken:
+          type: string
+          example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZWVwc2NlbnQiLCJzdWIiOiJiMmIiLCJleHAiOjE2OTgxMjM5MDA4MTAsImlhdCI6MTY5ODAzNzUwMDgxMCwiaWQiOiJ0ZXN0NCIsImlzQXV0aFRva2VuIjp0cnVlfQ.53GmunnGza-yhOy6gBoPPCcB0Q5zZi9HEOtlvn42hqI'
+          description: 'authToken'
+        expireDate:
+          type: date-time
+          example: '2023-11-15T05:24:05.342+00:00'
+          description: '만료 날짜'
+        msg:
+          type: string
+          example: 'Token alady exists'

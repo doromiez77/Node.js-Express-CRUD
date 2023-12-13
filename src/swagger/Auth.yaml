@@ -1,0 +1,96 @@
+paths:
+  /login:
+    post:
+      summary: 사용자 로그인
+      description: 사용자 로그인
+      tags:
+        - Auth
+      requestBody:
+        description: 사용자 정보
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - password
+              properties:
+                id:
+                  type: string
+                  example: test
+                  description: 테스트 아이디
+                password:
+                  type: string
+                  example: '1234'
+                  description: 테스트 암호
+      responses:
+        200:
+          description: 사용자 로그인 성공
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: 사용자 로그인 성공 (Token 신규)
+                  value:
+                    id: test
+                    authToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZWVwc2NlbnQiLCJzdWIiOiJiMmIiLCJleHAiOjE2OTgxMjM5MDA4MTAsImlhdCI6MTY5ODAzNzUwMDgxMCwiaWQiOiJ0ZXN0NCIsImlzQXV0aFRva2VuIjp0cnVlfQ.53GmunnGza-yhOy6gBoPPCcB0Q5zZi9HEOtlvn42hqI
+                    expireDate: '2023-11-15T05:24:05.342+00:00'
+                example2:
+                  summary: 사용자 로그인 성공 (Token 이미 있을 경우)
+                  value:
+                    message: 'Token alady exists'
+                    id: test
+                    authToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZWVwc2NlbnQiLCJzdWIiOiJiMmIiLCJleHAiOjE2OTgxMjM5MDA4MTAsImlhdCI6MTY5ODAzNzUwMDgxMCwiaWQiOiJ0ZXN0NCIsImlzQXV0aFRva2VuIjp0cnVlfQ.53GmunnGza-yhOy6gBoPPCcB0Q5zZi9HEOtlvn42hqI
+                    expireDate: '2023-11-15T05:24:05.342+00:00'
+        404:
+          description: 사용자가 없는 경우
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidUser'
+        400:
+          description: 사용자 정보 누락
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: 사용자 정보 누락 (id)
+                  value:
+                    errorCode: -301
+                    errorMessage: Id required
+                    details: ''
+                example2:
+                  summary: 사용자 정보 누락 (password)
+                  value:
+                    errorCode: -302
+                    errorMessage: Password required
+                    details: ''
+        405:
+          description: Token이 없는 경우
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Token 이 없는 경우
+                  value:
+                    errorCode: -411
+                    errorMessage: AuthToken not found
+                    details: ''
+        500:
+          description: 사용자 로그인 오류
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Internal server error
+                  value:
+                    errorCode: -1
+                    errorMessage: Internal server error
+                    details: ''
+                example2:
+                  summary: generateAuthToken faild
+                  value:
+                    errorCode: -410
+                    errorMessage: generateAuthToken faild
+                    details: ''
